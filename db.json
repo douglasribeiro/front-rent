@@ -1,0 +1,6 @@
+{
+    "inquilinos": [
+        { "id": 1, "nome": "Inquilino 01", "email": "inquilino01@email.com"},
+        { "id": 2, "nome": "Inquilino 02", "email": "inquilino02@email.com"}
+    ]
+}

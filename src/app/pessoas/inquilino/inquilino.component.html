@@ -1,0 +1,51 @@
+<div class="card mt-0">
+    <div class="card-header">
+      <div class="float-left">
+        <h4>Inquilinos</h4>
+      </div>
+      <div class="float-right">
+        <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Inquilino</button>
+        <button type="button" class="btn btn-secondary" >Atualizar</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover" *ngIf="inquilinos$ | async as inquilinos; else loading">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Curso</th>
+            <th>e-mail</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inquilino of inquilinos" > 
+            <td>{{ inquilino.id }}</td>
+            <td>{{ inquilino.nome }}</td>
+            <td>{{ inquilino.email }}</td>
+            <td>
+              <span class="float-right">
+                <button class="btn btn-outline-warning mb-1 btn-sm">
+                  Atualizar
+                </button>
+                {{ ' ' }}
+                <button class="btn btn-outline-danger mb-1 btn-sm">
+                  Remover
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      
+        <ng-template #loading>
+            <div *ngIf="error$ | async; else loadingNoErrors">
+                Erro ao crregar Inquilinos tente novamente mais tarde.
+            </div>
+            <ng-template #loadingNoErrors>
+                <span>Carregando Cursos...</span>
+            </ng-template>
+        </ng-template>
+    </div>
+  </div>
