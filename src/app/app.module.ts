@@ -9,6 +9,7 @@ import { ProprietarioModule } from './pessoas/proprietario/proprietario.module';
 import { InquilinoModule } from './pessoas/inquilino/inquilino.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProprietarioModule,
     InquilinoModule,
     HttpClientModule,
+    FormsModule,
     ModalModule.forRoot()
   ],
   providers: [],

@@ -5,7 +5,7 @@ import { InquilinoFormComponent } from './inquilino-form/inquilino-form.componen
 import { InquilinoDetalheComponent } from './inquilino-detalhe/inquilino-detalhe.component';
 import { InquilinoRoutingModule } from './inquilino-routing.module';
 import { InquilinoService } from './inquilino.service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,8 +16,9 @@ import { InquilinoService } from './inquilino.service';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     InquilinoRoutingModule,
-  
+    ReactiveFormsModule
   ],
   providers: [
     InquilinoService

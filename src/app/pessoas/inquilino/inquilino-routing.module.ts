@@ -8,8 +8,9 @@ import { InquilinoComponent } from './inquilino.component';
 const inqRoutes: Routes = [
   { path: 'inquilino', component: InquilinoComponent },
   { path: 'inquilino/novo', component: InquilinoFormComponent },
+  { path: 'inquilino/editar/:id', component: InquilinoFormComponent },
   { path: 'inquilino/:id', component: InquilinoDetalheComponent },
-  { path: 'inquilino/:id/editar', component: InquilinoFormComponent },
+ 
 ];
 
 @NgModule({

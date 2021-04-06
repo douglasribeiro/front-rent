@@ -8,6 +8,7 @@ import { delay, tap} from 'rxjs/operators';
 })
 export class InquilinoService {
 
+  //json-server --watch db.json
   private readonly API = 'http://localhost:3000/inquilinos';
 
   getInquilinos(){
