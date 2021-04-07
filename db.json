@@ -1,6 +1,39 @@
 {
-    "inquilinos": [
-        { "id": 1, "nome": "Inquilino 01", "email": "inquilino01@email.com"},
-        { "id": 2, "nome": "Inquilino 02", "email": "inquilino02@email.com"}
-    ]
+  "inquilinos": [
+    {
+      "id": 1,
+      "nome": "Inquilino 01",
+      "email": "inquilino01@email.com"
+    },
+    {
+      "id": 2,
+      "nome": "Inquilino 02",
+      "email": "inquilino02@email.com"
+    },
+    {
+      "nome": "Inquilino via post",
+      "email": "viapost@email.com",
+      "id": 3
+    },
+    {
+      "id": 6,
+      "nome": "novo 9",
+      "email": "novo9@email.com"
+    },
+    {
+      "id": 8,
+      "nome": "novo 10",
+      "email": "novo10@email.com"
+    },
+    {
+      "id": 9,
+      "nome": "novo 11",
+      "email": "novo11@email.com"
+    },
+    {
+      "id": 10,
+      "nome": "inquilino 12 da Silva",
+      "email": "inquilino12@email.com"
+    }
+  ]
 }

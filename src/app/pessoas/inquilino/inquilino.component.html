@@ -5,7 +5,7 @@
       </div>
       <div class="float-right">
         <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Inquilino</button>
-        <button type="button" class="btn btn-secondary" >Atualizar</button>
+        <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
       </div>
     </div>
     <div class="card-body">
@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Curso</th>
+            <th>Inquilino</th>
             <th>e-mail</th>
             <th></th>
           </tr>
@@ -25,11 +25,11 @@
             <td>{{ inquilino.email }}</td>
             <td>
               <span class="float-right">
-                <button class="btn btn-outline-warning mb-1 btn-sm">
+                <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(inquilino.id)">
                   Atualizar
                 </button>
                 {{ ' ' }}
-                <button class="btn btn-outline-danger mb-1 btn-sm">
+                <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(inquilino)">
                   Remover
                 </button>
               </span>
@@ -44,8 +44,16 @@
                 Erro ao crregar Inquilinos tente novamente mais tarde.
             </div>
             <ng-template #loadingNoErrors>
-                <span>Carregando Cursos...</span>
+                <span>Carregando Inquilinos...</span>
             </ng-template>
         </ng-template>
     </div>
   </div>
+
+  <ng-template #deleteModal>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja remover esse curso?</p>
+      <button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>
+    </div>
+  </ng-template>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { empty, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Inquilino } from './inquilino';
-import { InquilinoService } from './inquilino.service';
+import { Inquilino2Service } from './inquilino2.service';
 
 @Component({
   selector: 'app-inquilino',
@@ -16,15 +17,21 @@ export class InquilinoComponent implements OnInit {
   inquilinos?: any;
   inquilinos$?: Observable<any>
   error$ = new Subject<boolean>();
-  bsModalRef?: BsModalRef;
+  //bsModalRef?: BsModalRef;
+  deleteModalRef: BsModalRef;
+  @ViewChild('deleteModal') deleteModal: any;
 
-  constructor(private inquilinoService: InquilinoService,
-    private modalService: BsModalService) { }
+  inquilinoSelecionado: Inquilino;
+
+  constructor(
+    private inquilinoService: Inquilino2Service,
+    private modalService: BsModalService,
+    private alertService: AlertModalService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    //this.inquilinoService.getInquilinos()
-    //.subscribe(dados => this.inquilinos = dados);
-    this.inquilinos$ = this.inquilinoService.getInquilinos()
+    this.inquilinos$ = this.inquilinoService.getrecords()
     .pipe(
       catchError(error => {
         //this.error$.next(true);
@@ -35,9 +42,43 @@ export class InquilinoComponent implements OnInit {
   }
 
   handleError() {
-    this.bsModalRef = this.modalService.show(AlertModalComponent);
-    this.bsModalRef.content.type = 'danger';
-    this.bsModalRef.content.message = 'Erro ao carregar cursos. Tente novamente mais tarde.';
+    this.alertService.showAlertDanger('Erro ao carregar cursos. Tente novamente mais tarde.');
   }
 
+  onEdit(id: number){
+    this.router.navigate(['editar', id]);
+  }
+  
+  onDelete(inquilino: any){
+    this.inquilinoSelecionado = inquilino;
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
+  }
+
+  onRefresh(){
+    this.inquilinos$ = this.inquilinoService.getrecords().pipe(
+      catchError(error => {
+         console.error(error);
+         this.handleError();
+         return empty();
+      })
+    )
+  }
+
+  onConfirmDelete() {
+    this.inquilinoService.remove(this.inquilinoSelecionado.id)
+    .subscribe(
+      success => {
+        this.onRefresh();
+        this.deleteModalRef.hide();
+      },
+      error => {
+        this.alertService.showAlertDanger('Erro ao remover inquilino. Tente novamente mais tarde.');
+        this.deleteModalRef.hide();
+      }
+    );
+  }
+
+  onDeclineDelete() {
+    this.deleteModalRef.hide();
+  }
 }
