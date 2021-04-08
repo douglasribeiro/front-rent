@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { empty, Observable, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { Inquilino } from './inquilino';
 import { Inquilino2Service } from './inquilino2.service';
@@ -14,8 +14,8 @@ import { Inquilino2Service } from './inquilino2.service';
 })
 export class InquilinoComponent implements OnInit {
 
-  inquilinos?: any;
-  inquilinos$?: Observable<any>
+  //inquilinos?: any;
+  inquilinos$: Observable<any>
   error$ = new Subject<boolean>();
   //bsModalRef?: BsModalRef;
   deleteModalRef: BsModalRef;
@@ -39,6 +39,7 @@ export class InquilinoComponent implements OnInit {
         return empty();
       })
     );
+    
   }
 
   handleError() {
@@ -46,7 +47,7 @@ export class InquilinoComponent implements OnInit {
   }
 
   onEdit(id: number){
-    this.router.navigate(['editar', id]);
+    this.router.navigate(['inquilino/editar', id]);
   }
   
   onDelete(inquilino: any){
@@ -82,3 +83,4 @@ export class InquilinoComponent implements OnInit {
     this.deleteModalRef.hide();
   }
 }
+

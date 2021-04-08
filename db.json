@@ -11,11 +11,6 @@
       "email": "inquilino02@email.com"
     },
     {
-      "nome": "Inquilino via post",
-      "email": "viapost@email.com",
-      "id": 3
-    },
-    {
       "id": 6,
       "nome": "novo 9",
       "email": "novo9@email.com"
@@ -34,6 +29,19 @@
       "id": 10,
       "nome": "inquilino 12 da Silva",
       "email": "inquilino12@email.com"
+    }
+  ],
+  "proprietarios": [
+    {
+      "id": 1,
+      "nome": "Proprio 1",
+      "email": "proprio1@email.com"
+    }
+  ],
+  "usuario": [
+    {
+      "id": 2,
+      "nome": "Usuario 2 alterado"
     }
   ]
 }

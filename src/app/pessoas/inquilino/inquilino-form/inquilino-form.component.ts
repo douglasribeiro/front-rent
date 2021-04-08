@@ -43,6 +43,8 @@ export class InquilinoFormComponent implements OnInit {
 
     const inquilino = this.route.snapshot.data['inquilino'];
 
+    console.log(inquilino);
+
     this.form = this.fb.group({
       id: [inquilino.id],
       nome: [inquilino.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(70)]],
@@ -107,7 +109,6 @@ export class InquilinoFormComponent implements OnInit {
     this.location.back();
   }
 
-  
 
 }
 
