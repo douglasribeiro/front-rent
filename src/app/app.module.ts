@@ -14,8 +14,7 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    
+    LoginComponent
   ],
   imports: [
     BrowserModule,

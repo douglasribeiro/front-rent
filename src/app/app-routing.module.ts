@@ -6,8 +6,10 @@ import { LoginComponent } from './core/login/login.component';
 const routes: Routes = [
   {path: 'inquilino', loadChildren: () => import('./pessoas/inquilino/inquilino.module')
     .then(m => m.InquilinoModule)},
-    {path: 'usuario', loadChildren: () => import('./pessoas/usuario/usuario.module')
+  {path: 'usuario', loadChildren: () => import('./pessoas/usuario/usuario.module')
     .then(m => m.UsuarioModule)},
+  {path: 'proprietario', loadChildren: () => import('./pessoas/proprietario/proprietario.module')
+    .then(m => m.ProprietarioModule)},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home'}

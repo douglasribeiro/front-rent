@@ -5,51 +5,50 @@ import { Observable } from 'rxjs/internal/Observable';
 import { empty } from 'rxjs/internal/observable/empty';
 import { catchError, tap } from 'rxjs/operators';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
-import { Usuario } from './usuario';
-import { UsuarioService } from './usuario.service';
+import { Proprietario } from './proprietario';
+import { ProprietarioService } from './proprietario.service';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  selector: 'app-proprietario',
+  templateUrl: './proprietario.component.html',
+  styleUrls: ['./proprietario.component.css']
 })
-export class UsuarioComponent implements OnInit {
+export class ProprietarioComponent implements OnInit {
 
-  user: any[];
-  usuarios: Usuario[];
-  usuarios$: Observable<any>
+  proprietarios$: Observable<any>;
+  prop: any;
+  propSelecionado: Proprietario;
   deleteModalRef: BsModalRef;
-  usuarioSelecionado: Usuario;
   @ViewChild('deleteModal') deleteModal: any;
 
+
   constructor(
-    private service: UsuarioService,
-    private modalService: BsModalService,
+    private service: ProprietarioService,
     private alertService: AlertModalService,
+    private route: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute
+    private modalService: BsModalService,
   ) { }
 
   ngOnInit(): void {
-
-    this.usuarios$ = this.service.getrecords()
+    this.proprietarios$ = this.service.getrecords()
     .pipe(
-      tap(x => this.user = x),
+      tap(x => this.prop = x),
       catchError(error => {
         //this.error$.next(true);
         this.handleError();
         return empty();
       })
     );
-      console.log(this.user);
+    console.log(this.prop);
   }
 
   handleError() {
-    this.alertService.showAlertDanger('Erro ao carregar usuario. Tente novamente mais tarde.');
+    this.alertService.showAlertDanger('Erro ao carregar proprietarios. Tente novamente mais tarde.');
   }
 
   onRefresh(){
-    this.usuarios$ = this.service.getrecords().pipe(
+    this.proprietarios$ = this.service.getrecords().pipe(
       catchError(error => {
          console.error(error);
          this.handleError();
@@ -62,21 +61,20 @@ export class UsuarioComponent implements OnInit {
     this.router.navigate(['editar', id], {relativeTo: this.route});
   }
 
-  onDelete(usuario: any){
-    console.log(usuario.id)
-    this.usuarioSelecionado = usuario;
+  onDelete(proprietario: any){
+    this.propSelecionado = proprietario;
     this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
   }
-
+  
   onConfirmDelete() {
-    this.service.remove(this.usuarioSelecionado.id)
+    this.service.remove(this.propSelecionado.id)
     .subscribe(
       success => {
         this.onRefresh();
         this.deleteModalRef.hide();
       },
       error => {
-        this.alertService.showAlertDanger('Erro ao remover usuario. Tente novamente mais tarde.');
+        this.alertService.showAlertDanger('Erro ao remover proprietario. Tente novamente mais tarde.');
         this.deleteModalRef.hide();
       }
     );
@@ -86,7 +84,3 @@ export class UsuarioComponent implements OnInit {
     this.deleteModalRef.hide();
   }
 }
-function cat(): import("rxjs").OperatorFunction<any, any> {
-  throw new Error('Function not implemented.');
-}
-
